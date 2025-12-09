@@ -130,8 +130,11 @@ const App = () => {
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-3"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center shadow-md">
-              <span className="text-white font-bold text-lg">K</span>
+            <img
+              src={require('../assets/images/png.png')}>
+              alt="KawaiiBit Logo"
+              className="w-10 h-10 rounded-full shadow-md object-cover"
+                />
             </div>
             <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
               KawaiiBit
