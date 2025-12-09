@@ -456,7 +456,7 @@ const App = () => {
               </p>
               <div className="flex items-center justify-center sm:justify-start space-x-3 text-purple-600 font-semibold">
                 <Star size={24} />
-                <span className="text-lg">Loved by over 10,000 customers</span>
+                <span className="text-lg">Loved by over 100 customers</span>
               </div>
             </div>
             <div className="relative">
