@@ -21,7 +21,7 @@ const App = () => {
       name: 'Shadow Puff Roll',
       description: 'Lumpia dengan isi ubi ungu yang manis dan keju yang cheesy',
       price: 'Rp 10.000',
-      image: 'https://placehold.co/300x200/8B5CF6/FFFFFF?text=Shadow+Puff+Roll',
+      image: shadow_puff_rolljpg,
       category: 'single'
     },
     {
@@ -29,7 +29,7 @@ const App = () => {
       name: 'Mystic Mana Bowl',
       description: 'Dessert bowl ubi ungu dengan paduan vla vanilla dan keju yang manis dan lembut',
       price: 'Rp 8.000',
-      image: 'https://placehold.co/300x200/A78BFA/FFFFFF?text=Mystic+Mana+Bowl',
+      image: mystic_mana_bowljpg,
       category: 'single'
     },
     {
@@ -37,7 +37,7 @@ const App = () => {
       name: 'Potion of Elixir',
       description: 'Minuman rasa Taro dengan es batu yang menyegarkan',
       price: 'Rp 8.000',
-      image: 'https://placehold.co/300x200/C084FC/FFFFFF?text=Potion+of+Elixir',
+      image: potion_of_elixirjpg,
       category: 'single'
     },
     {
@@ -45,7 +45,7 @@ const App = () => {
       name: 'Shadow Feasts Pack',
       description: 'Lumpia ubi ungu + Dessert Bowl ubi ungu',
       price: 'Rp 18.000',
-      image: 'https://placehold.co/300x200/D8B4FE/FFFFFF?text=Shadow+Feasts+Pack',
+      image: shadow_feasts_packjpg,
       category: 'combo'
     },
     {
@@ -53,7 +53,7 @@ const App = () => {
       name: 'Crunch & Chill Set',
       description: 'Lumpia ubi ungu + Minuman es taro',
       price: 'Rp 18.000',
-      image: 'https://placehold.co/300x200/E9D5FF/FFFFFF?text=Crunch+%26+Chill',
+      image: crunch_and_chill_setjpg,
       category: 'combo'
     },
     {
@@ -61,7 +61,7 @@ const App = () => {
       name: 'Winter Purple Pack',
       description: 'Dessert bowl ubi ungu + Minuman es taro',
       price: 'Rp 16.000',
-      image: 'https://placehold.co/300x200/F3E8FF/FFFFFF?text=Winter+Purple+Pack',
+      image: winter_purple_packjpg,
       category: 'combo'
     },
     {
@@ -69,7 +69,7 @@ const App = () => {
       name: 'Purple Paradise Pack',
       description: 'Lumpia ubi ungu + Dessert Bowl ubi ungu + Minuman es taro',
       price: 'Rp 23.000',
-      image: 'https://placehold.co/300x200/EDE9FE/FFFFFF?text=Purple+Paradise',
+      image: purple_paradise_packjpg,
       category: 'combo'
     }
   ];
