@@ -212,7 +212,7 @@ const App = () => {
             variants={itemVariants}
             initial="hidden"
             animate="visible"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-2 sm:mb-3 leading-tight"
           >
             <span className="bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent block">
               Sweet Purple
