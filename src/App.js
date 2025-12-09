@@ -28,7 +28,7 @@ const App = () => {
       name: 'Shadow Puff Roll',
       description: 'Lumpia dengan isi ubi ungu yang manis dan keju yang cheesy',
       price: 'Rp 10.000',
-      image: shadow_puff_rollImg,
+      image: shadowPuffRollImg,
       category: 'single'
     },
     {
@@ -36,7 +36,7 @@ const App = () => {
       name: 'Mystic Mana Bowl',
       description: 'Dessert bowl ubi ungu dengan paduan vla vanilla dan keju yang manis dan lembut',
       price: 'Rp 8.000',
-      image: mystic_mana_bowlImg,
+      image: mysticManaBowlImg,
       category: 'single'
     },
     {
@@ -44,7 +44,7 @@ const App = () => {
       name: 'Potion of Elixir',
       description: 'Minuman rasa Taro dengan es batu yang menyegarkan',
       price: 'Rp 8.000',
-      image: potion_of_elixirImg,
+      image: potionOfElixirImg,
       category: 'single'
     },
     {
@@ -52,7 +52,7 @@ const App = () => {
       name: 'Shadow Feasts Pack',
       description: 'Lumpia ubi ungu + Dessert Bowl ubi ungu',
       price: 'Rp 18.000',
-      image: shadow_feasts_packImg,
+      image: shadowFeastsPackImg,
       category: 'combo'
     },
     {
@@ -60,7 +60,7 @@ const App = () => {
       name: 'Crunch & Chill Set',
       description: 'Lumpia ubi ungu + Minuman es taro',
       price: 'Rp 18.000',
-      image: crunch_and_chill_setImg,
+      image: crunchAndChillSetImg,
       category: 'combo'
     },
     {
@@ -68,7 +68,7 @@ const App = () => {
       name: 'Winter Purple Pack',
       description: 'Dessert bowl ubi ungu + Minuman es taro',
       price: 'Rp 16.000',
-      image: winter_purple_packImg,
+      image: winterPurplePackImg,
       category: 'combo'
     },
     {
@@ -76,7 +76,7 @@ const App = () => {
       name: 'Purple Paradise Pack',
       description: 'Lumpia ubi ungu + Dessert Bowl ubi ungu + Minuman es taro',
       price: 'Rp 23.000',
-      image: purple_paradise_packImg,
+      image: purpleParadisePackImg,
       category: 'combo'
     }
   ];
