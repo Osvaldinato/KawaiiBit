@@ -131,7 +131,7 @@ const App = () => {
             className="flex items-center space-x-3"
           >
             <img
-              src={require('../assets/images/png.png')}>
+              src={require('src/assets/images/png.png')}>
               alt="KawaiiBit Logo"
               className="w-10 h-10 rounded-full shadow-md object-cover"
                 />
@@ -628,8 +628,11 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-lg">K</span>
+              <img 
+                src={require('src/assets/images/logo.png')} 
+                  alt="KawaiiBit Logo"
+                    className="w-10 h-10 rounded-full shadow-md object-cover"
+                      />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
                 KawaiiBit
