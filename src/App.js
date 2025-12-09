@@ -571,38 +571,25 @@ const App = () => {
               </div>
           
             </div>
-            
             <div>
               <motion.div
                 variants={itemVariants}
-                className="bg-white rounded-2xl p-6 sm:p-8 shadow-md"
+                className="bg-white rounded-2xl p-6 sm:p-8 shadow-md text-center"
               >
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h3>
-                <form className="space-y-4">
-                  <input 
-                    type="text" 
-                    placeholder="Your Name" 
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  />
-                  <input 
-                    type="email" 
-                    placeholder="Your Email" 
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  />
-                  <textarea 
-                    placeholder="Your Message" 
-                    rows="4"
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
-                  ></textarea>
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
-                  >
-                    Send Message
-                  </motion.button>
-                </form>
+                <h3 className="text-2xl font-bold text-gray-800 mb-6">Send us Feedback</h3>
+                <p className="text-gray-600 mb-6">
+                  Have suggestions or feedback? Help us improve by filling out our quick form!
+                </p>
+                <motion.a
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  href="https://forms.gle/Qmr7k5aakCbfy8hD6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-gradient-to-r from-purple-600 to-purple-800 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
+                >
+                  Go to Feedback Form
+                </motion.a>
               </motion.div>
             </div>
           </motion.div>
