@@ -131,10 +131,10 @@ const App = () => {
             className="flex items-center space-x-3"
           >
             <img
-              src={require('src/assets/images/png.jpg')}
-              className="w-10 h-10 rounded-full shadow-md object-cover"
-            />
-            </div>
+            src={require('./assets/images/png.jpg')}
+            alt="KawaiiBit Logo"
+            className="w-10 h-10 rounded-full shadow-md object-cover"
+          />
             <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
               KawaiiBit
             </span>
@@ -628,10 +628,10 @@ const App = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-3 mb-4 md:mb-0">
               <img 
-                src={require('src/assets/images/png.jpg')} 
-                  className="w-10 h-10 rounded-full shadow-md object-cover"
+                src={require('./assets/images/png.jpg')} 
+                alt="KawaiiBit Logo"
+                className="w-10 h-10 rounded-full shadow-md object-cover"
               />
-              </div>
               <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
                 KawaiiBit
               </span>
