@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone, Mail, MapPin, Star, Instagram, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import "./index.css";
+import shadowPuffRollImg from './assets/images/shadow_puff_roll.jpg';
+import mysticManaBowlImg from './assets/images/mystic_mana_bowl.jpg';
+import potionOfElixirImg from './assets/images/potion_of_elixir.jpg';
+import shadowFeastsPackImg from './assets/images/shadow_feasts_pack.jpg';
+import crunchAndChillSetImg from './assets/images/crunch_and_chill_set.jpg';
+import winterPurplePackImg from './assets/images/winter_purple_pack.jpg';
+import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,13 +21,6 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-import shadowPuffRollImg from './assets/images/shadow_puff_roll.jpg';
-import mysticManaBowlImg from './assets/images/mystic_mana_bowl.jpg';
-import potionOfElixirImg from './assets/images/potion_of_elixir.jpg';
-import shadowFeastsPackImg from './assets/images/shadow_feasts_pack.jpg';
-import crunchAndChillSetImg from './assets/images/crunch_and_chill_set.jpg';
-import winterPurplePackImg from './assets/images/winter_purple_pack.jpg';
-import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
   // Data produk (tanpa logika pesanan)
   const products = [
     {
@@ -28,7 +28,7 @@ import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
       name: 'Shadow Puff Roll',
       description: 'Lumpia dengan isi ubi ungu yang manis dan keju yang cheesy',
       price: 'Rp 10.000',
-      image: shadow_puff_rolljpg,
+      image: shadow_puff_roll,
       category: 'single'
     },
     {
@@ -36,7 +36,7 @@ import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
       name: 'Mystic Mana Bowl',
       description: 'Dessert bowl ubi ungu dengan paduan vla vanilla dan keju yang manis dan lembut',
       price: 'Rp 8.000',
-      image: mystic_mana_bowljpg,
+      image: mystic_mana_bowl,
       category: 'single'
     },
     {
@@ -44,7 +44,7 @@ import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
       name: 'Potion of Elixir',
       description: 'Minuman rasa Taro dengan es batu yang menyegarkan',
       price: 'Rp 8.000',
-      image: potion_of_elixirjpg,
+      image: potion_of_elixir,
       category: 'single'
     },
     {
@@ -52,7 +52,7 @@ import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
       name: 'Shadow Feasts Pack',
       description: 'Lumpia ubi ungu + Dessert Bowl ubi ungu',
       price: 'Rp 18.000',
-      image: shadow_feasts_packjpg,
+      image: shadow_feasts_pack,
       category: 'combo'
     },
     {
@@ -60,7 +60,7 @@ import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
       name: 'Crunch & Chill Set',
       description: 'Lumpia ubi ungu + Minuman es taro',
       price: 'Rp 18.000',
-      image: crunch_and_chill_setjpg,
+      image: crunch_and_chill_set,
       category: 'combo'
     },
     {
@@ -68,7 +68,7 @@ import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
       name: 'Winter Purple Pack',
       description: 'Dessert bowl ubi ungu + Minuman es taro',
       price: 'Rp 16.000',
-      image: winter_purple_packjpg,
+      image: winter_purple_pack,
       category: 'combo'
     },
     {
@@ -76,7 +76,7 @@ import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
       name: 'Purple Paradise Pack',
       description: 'Lumpia ubi ungu + Dessert Bowl ubi ungu + Minuman es taro',
       price: 'Rp 23.000',
-      image: purple_paradise_packjpg,
+      image: purple_paradise_pack,
       category: 'combo'
     }
   ];
