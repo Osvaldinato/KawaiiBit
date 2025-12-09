@@ -14,6 +14,13 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+import shadowPuffRollImg from './assets/images/shadow_puff_roll.jpg';
+import mysticManaBowlImg from './assets/images/mystic_mana_bowl.jpg';
+import potionOfElixirImg from './assets/images/potion_of_elixir.jpg';
+import shadowFeastsPackImg from './assets/images/shadow_feasts_pack.jpg';
+import crunchAndChillSetImg from './assets/images/crunch_and_chill_set.jpg';
+import winterPurplePackImg from './assets/images/winter_purple_pack.jpg';
+import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
   // Data produk (tanpa logika pesanan)
   const products = [
     {
