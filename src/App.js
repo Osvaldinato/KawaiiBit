@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Mail, MapPin, Star, Instagram, Clock } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, Phone, Mail, MapPin, Star, Instagram, Clock, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import "./index.css";
 
@@ -13,11 +13,57 @@ import winterPurplePackImg from './assets/images/winter_purple_pack.jpg';
 import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
 import logoImg from './assets/images/png.jpg';
 
+// --- Knowledge Base (Pertanyaan & Jawaban) ---
+const knowledgeBase = [
+  {
+    keywords: ['shadow puff roll', 'lumpia ubi ungu', 'isi ubi ungu'],
+    answer: "Shadow Puff Roll adalah lumpia spesial KawaiiBit dengan isian ubi ungu manis dan keju yang super cheesy! 💜 Harganya Rp10.000."
+  },
+  {
+    keywords: ['mystic mana bowl', 'dessert bowl', 'bowl ubi ungu'],
+    answer: "Mystic Mana Bowl adalah dessert bowl berbahan dasar ubi ungu, dipadukan dengan vla vanilla dan taburan keju lembut. Harganya Rp8.000."
+  },
+  {
+    keywords: ['potion of elixir', 'minuman taro', 'es taro'],
+    answer: "Potion of Elixir adalah minuman segar rasa taro dengan es batu yang menyegarkan. Cocok banget buat teman dessert! Harganya Rp8.000."
+  },
+  {
+    keywords: ['combo', 'pack', 'shadow feasts', 'crunch and chill', 'winter purple', 'purple paradise'],
+    answer: "Kami punya 4 combo menarik:\n• Shadow Feasts Pack (lumpia + bowl) – Rp18.000\n• Crunch & Chill Set (lumpia + minuman) – Rp18.000\n• Winter Purple Pack (bowl + minuman) – Rp16.000\n• Purple Paradise Pack (lumpia + bowl + minuman) – Rp23.000"
+  },
+  {
+    keywords: ['harga', 'berapa', 'murah', 'cost'],
+    answer: "Harga produk kami mulai dari Rp8.000! Single item: Rp8.000–Rp10.000. Combo pack: Rp16.000–Rp23.000. Semua pakai bahan premium loh! 💜"
+  },
+  {
+    keywords: ['cara order', 'pesan', 'beli', 'order'],
+    answer: "Saat ini pemesanan dilakukan via Google Form! Klik tombol 'Order Now' di halaman Menu, lalu isi form lengkap. Tim kami akan konfirmasi via WhatsApp!"
+  },
+  {
+    keywords: ['jam', 'operasional', 'buka', 'tutup'],
+    answer: "Kami buka:\n• Senin–Jumat: 09.00–19.00\n• Sabtu: 10.00–20.00\n• Minggu: 11.00–18.00\nLokasi: Area Kampus Telkom University 💜"
+  },
+  {
+    keywords: ['lokasi', 'dimana', 'alamat'],
+    answer: "KawaiiBit beroperasi di area Kampus Telkom University. Kami melayani pengambilan langsung dan delivery dalam area kampus!"
+  }
+];
+
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showAI, setShowAI] = useState(false); // <-- tambahkan state ini
+  const [showAI, setShowAI] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [messages, setMessages] = useState([
+    { text: "Hai! Saya KawaiiBot 💜\nTanya apa saja tentang produk, harga, atau cara order!", sender: 'ai' }
+  ]);
+  const messagesEndRef = useRef(null);
+
+  // Scroll otomatis ke bawah saat pesan baru muncul
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   useEffect(() => {
     let title = 'KawaiiBit – Sweet Purple Delights';
@@ -32,6 +78,37 @@ const App = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Fungsi untuk mencari jawaban berdasarkan input
+  const getResponse = (input) => {
+    const lowerInput = input.toLowerCase();
+    for (const item of knowledgeBase) {
+      if (item.keywords.some(kw => lowerInput.includes(kw))) {
+        return item.answer;
+      }
+    }
+    return "Maaf, saya belum paham pertanyaanmu 😅\nCoba tanya tentang produk, harga, combo, jam operasional, atau cara order ya!";
+  };
+
+  const handleSend = () => {
+    if (!inputValue.trim()) return;
+
+    const userMessage = { text: inputValue, sender: 'user' };
+    const aiResponse = getResponse(inputValue);
+    const aiMessage = { text: aiResponse, sender: 'ai' };
+
+    setMessages(prev => [...prev, userMessage, aiMessage]);
+    setInputValue('');
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  // ... (products, teamMembers, containerVariants, dll — tetap sama)
 
   const products = [
     {
@@ -135,6 +212,8 @@ const App = () => {
       {children}
     </motion.div>
   );
+
+  // ... (Navigation, HomePage, MenuPage, AboutPage, ContactPage — tetap sama)
 
   const Navigation = () => (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -659,7 +738,7 @@ const App = () => {
         </div>
       </footer>
 
-      {/* ✨ KawaiiBot AI Assistant - Floating Button */}
+      {/* 💜 KawaiiBot - Floating Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <motion.button
           whileHover={{ scale: 1.05 }}
@@ -672,52 +751,68 @@ const App = () => {
         </motion.button>
       </div>
 
-      {/* Chat window */}
+      {/* Chat Window */}
       <AnimatePresence>
         {showAI && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 w-80 max-w-[90vw] bg-white rounded-2xl shadow-xl border border-purple-100 z-50 overflow-hidden"
+            className="fixed bottom-24 right-6 w-80 max-w-[90vw] bg-white rounded-2xl shadow-xl border border-purple-100 z-50 flex flex-col"
           >
-            <div className="bg-gradient-to-r from-purple-600 to-purple-800 p-4 text-white">
-              <div className="flex justify-between items-center">
-                <h3 className="font-bold">KawaiiBot 💜</h3>
-                <button
-                  onClick={() => setShowAI(false)}
-                  className="text-white/80 hover:text-white"
-                  aria-label="Close chat"
-                >
-                  ✕
-                </button>
-              </div>
-              <p className="text-xs opacity-90 mt-1">Tanya tentang produk, harga, atau cara order!</p>
-            </div>
-            <div className="p-4">
-              <div className="text-sm text-gray-700 space-y-3">
-                <p>Hai! Saya KawaiiBot, asisten virtual KawaiiBit. 😊</p>
-                <p>Berikut hal yang bisa saya bantu:</p>
-                <ul className="list-disc pl-4 space-y-1 text-purple-700">
-                  <li>Apa itu Shadow Puff Roll?</li>
-                  <li>Berapa harga combo pack?</li>
-                  <li>Bagaimana cara order?</li>
-                  <li>Jam operasional?</li>
-                </ul>
-              </div>
-            </div>
-            <div className="p-4 border-t border-gray-100">
-              <a
-                href="https://forms.gle/Qmr7k5aakCbfy8hD6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full text-center bg-gradient-to-r from-purple-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:opacity-90"
+            {/* Header */}
+            <div className="bg-gradient-to-r from-purple-600 to-purple-800 p-4 text-white flex justify-between items-center">
+              <h3 className="font-bold">KawaiiBot 💜</h3>
+              <button
+                onClick={() => setShowAI(false)}
+                className="text-white/80 hover:text-white text-lg"
+                aria-label="Close chat"
               >
-                Kirim Pertanyaan Anda
-              </a>
-              <p className="text-xs text-gray-500 mt-2 text-center">
-                Tim kami akan segera menjawab!
-              </p>
+                ✕
+              </button>
+            </div>
+
+            {/* Messages */}
+            <div className="p-4 flex-1 overflow-y-auto max-h-60 space-y-3">
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`px-3 py-2 rounded-2xl text-sm ${
+                      msg.sender === 'user'
+                        ? 'bg-purple-500 text-white'
+                        : 'bg-gray-100 text-gray-800'
+                    }`}
+                  >
+                    {msg.text.split('\n').map((line, idx) => (
+                      <p key={idx} className="whitespace-pre-line">{line}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Input */}
+            <div className="p-3 border-t border-gray-100 flex">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Tanya tentang produk, harga, dll..."
+                className="flex-1 border border-gray-300 rounded-l-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-300"
+              />
+              <button
+                onClick={handleSend}
+                disabled={!inputValue.trim()}
+                className="bg-purple-600 text-white p-2 rounded-r-full disabled:opacity-50"
+                aria-label="Send message"
+              >
+                <Send size={16} />
+              </button>
             </div>
           </motion.div>
         )}
