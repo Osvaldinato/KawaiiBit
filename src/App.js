@@ -14,12 +14,63 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [showAI, setShowAI] = useState(false);
+  
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // --- Tambahkan di dalam return(), sebelum </div> terakhir ---
+<div className="fixed bottom-6 right-6 z-50">
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    onClick={() => setShowAI(!showAI)}
+    className="bg-gradient-to-r from-purple-600 to-purple-800 text-white p-3 rounded-full shadow-lg"
+    aria-label="Ask AI assistant"
+  >
+    💬
+  </motion.button>
+</div>
+
+{showAI && (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="fixed bottom-24 right-6 w-80 bg-white rounded-2xl shadow-xl border border-purple-100 z-50 overflow-hidden"
+  >
+    <div className="bg-gradient-to-r from-purple-600 to-purple-800 p-4 text-white">
+      <h3 className="font-bold">KawaiiBit AI Assistant</h3>
+      <p className="text-xs opacity-90">Tanya apa saja tentang produk kami!</p>
+    </div>
+    <div className="p-4 max-h-60 overflow-y-auto">
+      <div className="text-sm text-gray-600">
+        Contoh pertanyaan:
+        <ul className="mt-2 space-y-1 text-purple-700">
+          <li>• Apa itu Shadow Puff Roll?</li>
+          <li>• Apa saja combo yang tersedia?</li>
+          <li>• Bagaimana cara order?</li>
+          <li>• Jam operasional?</li>
+        </ul>
+      </div>
+    </div>
+    <div className="p-4 border-t border-gray-100">
+      <a
+        href="https://forms.gle/Qmr7k5aakCbfy8hD6"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block w-full text-center bg-gradient-to-r from-purple-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium"
+      >
+        Kirim Pertanyaan →
+      </a>
+      <p className="text-xs text-gray-500 mt-2 text-center">
+        Jawaban otomatis akan segera hadir. Untuk saat ini, kirim via form!
+      </p>
+    </div>
+  </motion.div>
+)}
 
   // Data produk (tanpa logika pesanan)
   const products = [
