@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone, Mail, MapPin, Star, Instagram, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import "./index.css";
+
+// --- Impor gambar produk (pastikan file ada di src/assets/images/) ---
 import shadowPuffRollImg from './assets/images/shadow_puff_roll.jpg';
 import mysticManaBowlImg from './assets/images/mystic_mana_bowl.jpg';
 import potionOfElixirImg from './assets/images/potion_of_elixir.jpg';
@@ -9,11 +11,21 @@ import shadowFeastsPackImg from './assets/images/shadow_feasts_pack.jpg';
 import crunchAndChillSetImg from './assets/images/crunch_and_chill_set.jpg';
 import winterPurplePackImg from './assets/images/winter_purple_pack.jpg';
 import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
+import logoImg from './assets/images/png.jpg'; // logo utama
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // --- Atur judul halaman dinamis ---
+  useEffect(() => {
+    let title = 'KawaiiBit – Sweet Purple Delights';
+    if (activePage === 'menu') title = 'Menu – KawaiiBit';
+    else if (activePage === 'about') title = 'Our Story – KawaiiBit';
+    else if (activePage === 'contact') title = 'Contact – KawaiiBit';
+    document.title = title;
+  }, [activePage]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -21,7 +33,6 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Data produk (tanpa logika pesanan)
   const products = [
     {
       id: 1,
@@ -138,10 +149,10 @@ const App = () => {
             className="flex items-center space-x-3"
           >
             <img
-            src={require('./assets/images/png.jpg')}
-            alt="KawaiiBit Logo"
-            className="w-10 h-10 rounded-full shadow-md object-cover"
-          />
+              src={logoImg}
+              alt="KawaiiBit Logo"
+              className="w-10 h-10 rounded-full shadow-md object-cover"
+            />
             <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
               KawaiiBit
             </span>
@@ -159,6 +170,7 @@ const App = () => {
                     ? 'text-purple-600 border-b-2 border-purple-600' 
                     : 'text-gray-700 hover:text-purple-600'
                 }`}
+                aria-current={activePage === page ? 'page' : undefined}
               >
                 {page}
               </motion.button>
@@ -170,6 +182,7 @@ const App = () => {
             whileTap={{ scale: 0.95 }}
             className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <X size={24} className="text-purple-600" /> : <Menu size={24} className="text-purple-600" />}
           </motion.button>
@@ -197,6 +210,7 @@ const App = () => {
                     ? 'text-purple-600 bg-purple-50 rounded-lg px-3' 
                     : 'text-gray-700 hover:text-purple-600'
                 }`}
+                aria-current={activePage === page ? 'page' : undefined}
               >
                 {page}
               </motion.button>
@@ -221,12 +235,12 @@ const App = () => {
             variants={itemVariants}
             initial="hidden"
             animate="visible"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-2 sm:mb-3 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-0 sm:mb-1 leading-tight mt-[-20px] sm:mt-[-30px]"
           >
             <span className="bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent block">
               Sweet Purple
             </span>
-            <span className="text-gray-800 block mt-2">Delights</span>
+            <span className="text-gray-800 block mt-1">Delights</span>
           </motion.h1>
           
           <motion.p 
@@ -246,6 +260,7 @@ const App = () => {
             whileTap={{ scale: 0.98 }}
             className="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             onClick={() => setActivePage('menu')}
+            aria-label="Explore our menu"
           >
             Explore Our Menu
           </motion.button>
@@ -283,12 +298,15 @@ const App = () => {
                 variants={itemVariants}
                 whileHover={{ y: -8 }}
                 className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
+                role="article"
+                aria-label={`${product.name}, ${product.price}`}
               >
                 <div className="mb-4 rounded-xl overflow-hidden relative">
                   <img 
                     src={product.image} 
                     alt={product.name}
                     className="w-full h-40 sm:h-48 object-cover"
+                    loading="lazy"
                   />
                   {product.category === 'combo' && (
                     <div className="absolute top-2 left-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
@@ -377,6 +395,8 @@ const App = () => {
                 variants={itemVariants}
                 whileHover={{ y: -4 }}
                 className="bg-white rounded-2xl p-6 sm:p-8 shadow-md hover:shadow-lg transition-all duration-300"
+                role="article"
+                aria-label={`${product.name}, ${product.price}`}
               >
                 <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
                   <div className="flex-shrink-0 relative">
@@ -384,6 +404,7 @@ const App = () => {
                       src={product.image} 
                       alt={product.name}
                       className="w-28 h-28 rounded-xl object-cover shadow-sm"
+                      loading="lazy"
                     />
                     {product.category === 'combo' && (
                       <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
@@ -401,7 +422,6 @@ const App = () => {
             ))}
           </motion.div>
 
-          {/* Call-to-Action ke Google Form */}
           <motion.div 
             variants={fadeInUp}
             initial="hidden"
@@ -414,6 +434,7 @@ const App = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-purple-600 to-purple-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              aria-label="Order now via Google Form"
             >
               Order Now via Google Form
             </a>
@@ -558,6 +579,8 @@ const App = () => {
                     variants={itemVariants}
                     whileHover={{ x: 6 }}
                     className="flex items-start space-x-4 p-5 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all"
+                    role="group"
+                    aria-label={`${item.title}: ${item.value}`}
                   >
                     <div className="bg-purple-100 p-3 rounded-full">
                       <span className="text-purple-600">{item.icon}</span>
@@ -570,7 +593,22 @@ const App = () => {
                 ))}
               </div>
           
+              <motion.div
+                variants={itemVariants}
+                className="bg-gradient-to-r from-purple-500 to-purple-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg"
+              >
+                <div className="flex items-center space-x-3 mb-4">
+                  <Clock size={24} />
+                  <h3 className="text-xl sm:text-2xl font-bold">Opening Hours</h3>
+                </div>
+                <div className="space-y-1.5 text-sm sm:text-base">
+                  <p>Monday - Friday: 9 AM - 7 PM</p>
+                  <p>Saturday: 10 AM - 8 PM</p>
+                  <p>Sunday: 11 AM - 6 PM</p>
+                </div>
+              </motion.div>
             </div>
+            
             <div>
               <motion.div
                 variants={itemVariants}
@@ -587,6 +625,7 @@ const App = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block bg-gradient-to-r from-purple-600 to-purple-800 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
+                  aria-label="Go to feedback form"
                 >
                   Go to Feedback Form
                 </motion.a>
@@ -622,7 +661,7 @@ const App = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-3 mb-4 md:mb-0">
               <img 
-                src={require('./assets/images/png.jpg')} 
+                src={logoImg} 
                 alt="KawaiiBit Logo"
                 className="w-10 h-10 rounded-full shadow-md object-cover"
               />
