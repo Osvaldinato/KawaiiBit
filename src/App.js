@@ -555,7 +555,7 @@ const App = () => {
                 <span className="text-lg">Loved by over 100 customers</span>
               </div>
             </div>
-          
+          </motion.div>
           <motion.div
             variants={containerVariants}
             initial="hidden"
