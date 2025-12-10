@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone, Mail, MapPin, Star, Instagram, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import "./index.css";
+
+// --- Impor gambar produk ---
 import shadowPuffRollImg from './assets/images/shadow_puff_roll.jpg';
 import mysticManaBowlImg from './assets/images/mystic_mana_bowl.jpg';
 import potionOfElixirImg from './assets/images/potion_of_elixir.jpg';
@@ -9,70 +11,28 @@ import shadowFeastsPackImg from './assets/images/shadow_feasts_pack.jpg';
 import crunchAndChillSetImg from './assets/images/crunch_and_chill_set.jpg';
 import winterPurplePackImg from './assets/images/winter_purple_pack.jpg';
 import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
+import logoImg from './assets/images/png.jpg';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showAI, setShowAI] = useState(false);
-  
+  const [showAI, setShowAI] = useState(false); // <-- tambahkan state ini
+
+  useEffect(() => {
+    let title = 'KawaiiBit – Sweet Purple Delights';
+    if (activePage === 'menu') title = 'Menu – KawaiiBit';
+    else if (activePage === 'about') title = 'Our Story – KawaiiBit';
+    else if (activePage === 'contact') title = 'Contact – KawaiiBit';
+    document.title = title;
+  }, [activePage]);
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // --- Tambahkan di dalam return(), sebelum </div> terakhir ---
-<div className="fixed bottom-6 right-6 z-50">
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    onClick={() => setShowAI(!showAI)}
-    className="bg-gradient-to-r from-purple-600 to-purple-800 text-white p-3 rounded-full shadow-lg"
-    aria-label="Ask AI assistant"
-  >
-    💬
-  </motion.button>
-</div>
-
-{showAI && (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    className="fixed bottom-24 right-6 w-80 bg-white rounded-2xl shadow-xl border border-purple-100 z-50 overflow-hidden"
-  >
-    <div className="bg-gradient-to-r from-purple-600 to-purple-800 p-4 text-white">
-      <h3 className="font-bold">KawaiiBit AI Assistant</h3>
-      <p className="text-xs opacity-90">Tanya apa saja tentang produk kami!</p>
-    </div>
-    <div className="p-4 max-h-60 overflow-y-auto">
-      <div className="text-sm text-gray-600">
-        Contoh pertanyaan:
-        <ul className="mt-2 space-y-1 text-purple-700">
-          <li>• Apa itu Shadow Puff Roll?</li>
-          <li>• Apa saja combo yang tersedia?</li>
-          <li>• Bagaimana cara order?</li>
-          <li>• Jam operasional?</li>
-        </ul>
-      </div>
-    </div>
-    <div className="p-4 border-t border-gray-100">
-      <a
-        href="https://forms.gle/Qmr7k5aakCbfy8hD6"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-full text-center bg-gradient-to-r from-purple-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium"
-      >
-        Kirim Pertanyaan →
-      </a>
-      <p className="text-xs text-gray-500 mt-2 text-center">
-        Jawaban otomatis akan segera hadir. Untuk saat ini, kirim via form!
-      </p>
-    </div>
-  </motion.div>
-)}
-
-  // Data produk (tanpa logika pesanan)
   const products = [
     {
       id: 1,
@@ -142,7 +102,6 @@ const App = () => {
     { name: 'Rangga Pratama Wiradinata', role: 'CTO', image: 'https://placehold.co/200x200/E9D5FF/FFFFFF?text=RPW' }
   ];
 
-  // Animasi
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -177,7 +136,6 @@ const App = () => {
     </motion.div>
   );
 
-  // --- Komponen Navigation ---
   const Navigation = () => (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white/95 backdrop-blur-md py-2 shadow-sm' : 'bg-white/90 backdrop-blur-md py-4'
@@ -189,10 +147,10 @@ const App = () => {
             className="flex items-center space-x-3"
           >
             <img
-            src={require('./assets/images/png.jpg')}
-            alt="KawaiiBit Logo"
-            className="w-10 h-10 rounded-full shadow-md object-cover"
-          />
+              src={logoImg}
+              alt="KawaiiBit Logo"
+              className="w-10 h-10 rounded-full shadow-md object-cover"
+            />
             <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
               KawaiiBit
             </span>
@@ -258,7 +216,6 @@ const App = () => {
     </nav>
   );
 
-  // --- Halaman Home ---
   const HomePage = () => (
     <PageTransition>
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-10">
@@ -272,12 +229,12 @@ const App = () => {
             variants={itemVariants}
             initial="hidden"
             animate="visible"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-2 sm:mb-3 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-0 sm:mb-1 leading-tight mt-[-20px] sm:mt-[-30px]"
           >
             <span className="bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent block">
               Sweet Purple
             </span>
-            <span className="text-gray-800 block mt-2">Delights</span>
+            <span className="text-gray-800 block mt-1">Delights</span>
           </motion.h1>
           
           <motion.p 
@@ -394,7 +351,6 @@ const App = () => {
     </PageTransition>
   );
 
-  // --- Halaman Menu ---
   const MenuPage = () => (
     <PageTransition>
       <section className="py-16 sm:py-20">
@@ -452,7 +408,6 @@ const App = () => {
             ))}
           </motion.div>
 
-          {/* Call-to-Action ke Google Form */}
           <motion.div 
             variants={fadeInUp}
             initial="hidden"
@@ -474,7 +429,6 @@ const App = () => {
     </PageTransition>
   );
 
-  // --- Halaman About ---
   const AboutPage = () => (
     <PageTransition>
       <section className="py-16 sm:py-20">
@@ -569,7 +523,6 @@ const App = () => {
     </PageTransition>
   );
 
-  // --- Halaman Contact ---
   const ContactPage = () => (
     <PageTransition>
       <section className="py-16 sm:py-20">
@@ -621,7 +574,22 @@ const App = () => {
                 ))}
               </div>
           
+              <motion.div
+                variants={itemVariants}
+                className="bg-gradient-to-r from-purple-500 to-purple-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg"
+              >
+                <div className="flex items-center space-x-3 mb-4">
+                  <Clock size={24} />
+                  <h3 className="text-xl sm:text-2xl font-bold">Opening Hours</h3>
+                </div>
+                <div className="space-y-1.5 text-sm sm:text-base">
+                  <p>Monday - Friday: 9 AM - 7 PM</p>
+                  <p>Saturday: 10 AM - 8 PM</p>
+                  <p>Sunday: 11 AM - 6 PM</p>
+                </div>
+              </motion.div>
             </div>
+            
             <div>
               <motion.div
                 variants={itemVariants}
@@ -673,7 +641,7 @@ const App = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-3 mb-4 md:mb-0">
               <img 
-                src={require('./assets/images/png.jpg')} 
+                src={logoImg} 
                 alt="KawaiiBit Logo"
                 className="w-10 h-10 rounded-full shadow-md object-cover"
               />
@@ -690,6 +658,70 @@ const App = () => {
           </div>
         </div>
       </footer>
+
+      {/* ✨ KawaiiBot AI Assistant - Floating Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setShowAI(!showAI)}
+          className="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-3 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-medium"
+          aria-label="Open KawaiiBot assistant"
+        >
+          💜 KawaiiBot
+        </motion.button>
+      </div>
+
+      {/* Chat window */}
+      <AnimatePresence>
+        {showAI && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="fixed bottom-24 right-6 w-80 max-w-[90vw] bg-white rounded-2xl shadow-xl border border-purple-100 z-50 overflow-hidden"
+          >
+            <div className="bg-gradient-to-r from-purple-600 to-purple-800 p-4 text-white">
+              <div className="flex justify-between items-center">
+                <h3 className="font-bold">KawaiiBot 💜</h3>
+                <button
+                  onClick={() => setShowAI(false)}
+                  className="text-white/80 hover:text-white"
+                  aria-label="Close chat"
+                >
+                  ✕
+                </button>
+              </div>
+              <p className="text-xs opacity-90 mt-1">Tanya tentang produk, harga, atau cara order!</p>
+            </div>
+            <div className="p-4">
+              <div className="text-sm text-gray-700 space-y-3">
+                <p>Hai! Saya KawaiiBot, asisten virtual KawaiiBit. 😊</p>
+                <p>Berikut hal yang bisa saya bantu:</p>
+                <ul className="list-disc pl-4 space-y-1 text-purple-700">
+                  <li>Apa itu Shadow Puff Roll?</li>
+                  <li>Berapa harga combo pack?</li>
+                  <li>Bagaimana cara order?</li>
+                  <li>Jam operasional?</li>
+                </ul>
+              </div>
+            </div>
+            <div className="p-4 border-t border-gray-100">
+              <a
+                href="https://forms.gle/Qmr7k5aakCbfy8hD6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center bg-gradient-to-r from-purple-500 to-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:opacity-90"
+              >
+                Kirim Pertanyaan Anda
+              </a>
+              <p className="text-xs text-gray-500 mt-2 text-center">
+                Tim kami akan segera menjawab!
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
