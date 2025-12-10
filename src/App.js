@@ -555,18 +555,6 @@ const App = () => {
                 <span className="text-lg">Loved by over 100 customers</span>
               </div>
             </div>
-            <div className="relative">
-              <div className="bg-gradient-to-br from-purple-200 to-purple-400 rounded-2xl w-full h-80 shadow-md"></div>
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-lg border border-purple-100">
-                <img 
-                  src="https://placehold.co/200x150/8B5CF6/FFFFFF?text=Fresh" 
-                  alt="Fresh Ingredients"
-                  className="rounded-lg w-full h-24 object-cover"
-                />
-                <p className="text-center text-xs text-gray-600 mt-1">Freshly sourced daily</p>
-              </div>
-            </div>
-          </motion.div>
           
           <motion.div
             variants={containerVariants}
