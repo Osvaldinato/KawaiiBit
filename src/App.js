@@ -62,7 +62,10 @@ const App = () => {
 
   // Scroll otomatis ke bawah saat pesan baru muncul
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  // Scroll hanya jika pesan terakhir berasal dari AI (bukan user sedang mengetik)
+    if (messages.length > 0 && messages[messages.length - 1].sender === 'ai') {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
   useEffect(() => {
