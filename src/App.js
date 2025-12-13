@@ -600,20 +600,7 @@ const App = () => {
                 ))}
               </div>
           
-              <motion.div
-                variants={itemVariants}
-                className="bg-gradient-to-r from-purple-500 to-purple-700 rounded-2xl p-6 sm:p-8 text-white shadow-lg"
-              >
-                <div className="flex items-center space-x-3 mb-4">
-                  <Clock size={24} />
-                  <h3 className="text-xl sm:text-2xl font-bold">Opening Hours</h3>
-                </div>
-                <div className="space-y-1.5 text-sm sm:text-base">
-                  <p>Monday - Friday: 9 AM - 7 PM</p>
-                  <p>Saturday: 10 AM - 8 PM</p>
-                  <p>Sunday: 11 AM - 6 PM</p>
-                </div>
-              </motion.div>
+            
             </div>
             
             <div>
