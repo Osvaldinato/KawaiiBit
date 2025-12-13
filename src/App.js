@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Phone, Mail, MapPin, Star, Instagram, Clock, Send } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Phone, Mail, MapPin, Star, Instagram, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import "./index.css";
 
@@ -13,61 +13,12 @@ import winterPurplePackImg from './assets/images/winter_purple_pack.jpg';
 import purpleParadisePackImg from './assets/images/purple_paradise_pack.jpg';
 import logoImg from './assets/images/png.jpg';
 
-// --- Knowledge Base (Pertanyaan & Jawaban) ---
-const knowledgeBase = [
-  {
-    keywords: ['shadow puff roll', 'lumpia ubi ungu', 'isi ubi ungu'],
-    answer: "Shadow Puff Roll adalah lumpia spesial KawaiiBit dengan isian ubi ungu manis dan keju yang super cheesy! 💜 Harganya Rp10.000."
-  },
-  {
-    keywords: ['mystic mana bowl', 'dessert bowl', 'bowl ubi ungu'],
-    answer: "Mystic Mana Bowl adalah dessert bowl berbahan dasar ubi ungu, dipadukan dengan vla vanilla dan taburan keju lembut. Harganya Rp8.000."
-  },
-  {
-    keywords: ['potion of elixir', 'minuman taro', 'es taro'],
-    answer: "Potion of Elixir adalah minuman segar rasa taro dengan es batu yang menyegarkan. Cocok banget buat teman dessert! Harganya Rp8.000."
-  },
-  {
-    keywords: ['combo', 'pack', 'shadow feasts', 'crunch and chill', 'winter purple', 'purple paradise'],
-    answer: "Kami punya 4 combo menarik:\n• Shadow Feasts Pack (lumpia + bowl) – Rp18.000\n• Crunch & Chill Set (lumpia + minuman) – Rp18.000\n• Winter Purple Pack (bowl + minuman) – Rp16.000\n• Purple Paradise Pack (lumpia + bowl + minuman) – Rp23.000"
-  },
-  {
-    keywords: ['harga', 'berapa', 'murah', 'cost'],
-    answer: "Harga produk kami mulai dari Rp8.000! Single item: Rp8.000–Rp10.000. Combo pack: Rp16.000–Rp23.000. Semua pakai bahan premium loh! 💜"
-  },
-  {
-    keywords: ['cara order', 'pesan', 'beli', 'order'],
-    answer: "Saat ini pemesanan dilakukan via Google Form! Klik tombol 'Order Now' di halaman Menu, lalu isi form lengkap. Tim kami akan konfirmasi via WhatsApp!"
-  },
-  {
-    keywords: ['jam', 'operasional', 'buka', 'tutup'],
-    answer: "Kami buka:\n• Senin–Jumat: 09.00–19.00\n• Sabtu: 10.00–20.00\n• Minggu: 11.00–18.00\nLokasi: Area Kampus Telkom University 💜"
-  },
-  {
-    keywords: ['lokasi', 'dimana', 'alamat'],
-    answer: "KawaiiBit beroperasi di area Kampus Telkom University. Kami melayani pengambilan langsung dan delivery dalam area kampus!"
-  }
-];
-
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showAI, setShowAI] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const [messages, setMessages] = useState([
-    { text: "Hai! Saya KawaiiBot 💜\nTanya apa saja tentang produk, harga, atau cara order!", sender: 'ai' }
-  ]);
-  const messagesEndRef = useRef(null);
 
-  // Scroll otomatis ke bawah saat pesan baru muncul
-  useEffect(() => {
-  // Scroll hanya jika pesan terakhir berasal dari AI (bukan user sedang mengetik)
-    if (messages.length > 0 && messages[messages.length - 1].sender === 'ai') {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);
-
+  // --- Ganti judul halaman dinamis ---
   useEffect(() => {
     let title = 'KawaiiBit – Sweet Purple Delights';
     if (activePage === 'menu') title = 'Menu – KawaiiBit';
@@ -82,36 +33,53 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fungsi untuk mencari jawaban berdasarkan input
-  const getResponse = (input) => {
-    const lowerInput = input.toLowerCase();
-    for (const item of knowledgeBase) {
-      if (item.keywords.some(kw => lowerInput.includes(kw))) {
-        return item.answer;
-      }
-    }
-    return "Maaf, saya belum paham pertanyaanmu 😅\nCoba tanya tentang produk, harga, combo, jam operasional, atau cara order ya!";
-  };
+  // --- Efek Sparkle Kursor ---
+  useEffect(() => {
+    const container = document.createElement('div');
+    container.id = 'sparkle-cursor';
+    container.style.position = 'fixed';
+    container.style.top = '0';
+    container.style.left = '0';
+    container.style.pointerEvents = 'none';
+    container.style.zIndex = '9999';
+    document.body.appendChild(container);
 
-  const handleSend = () => {
-    if (!inputValue.trim()) return;
+    const createSparkle = (x, y) => {
+      const sparkle = document.createElement('div');
+      sparkle.innerHTML = '✨';
+      sparkle.style.position = 'absolute';
+      sparkle.style.fontSize = '14px';
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+      sparkle.style.opacity = '1';
+      sparkle.style.pointerEvents = 'none';
+      sparkle.style.zIndex = '9999';
+      container.appendChild(sparkle);
 
-    const userMessage = { text: inputValue, sender: 'user' };
-    const aiResponse = getResponse(inputValue);
-    const aiMessage = { text: aiResponse, sender: 'ai' };
+      // Animasi menghilang
+      let opacity = 1;
+      const fade = setInterval(() => {
+        opacity -= 0.05;
+        sparkle.style.opacity = opacity.toString();
+        sparkle.style.transform = `translateY(${(1 - opacity) * -20}px)`;
+        if (opacity <= 0) {
+          clearInterval(fade);
+          sparkle.remove();
+        }
+      }, 30);
+    };
 
-    setMessages(prev => [...prev, userMessage, aiMessage]);
-    setInputValue('');
-  };
+    const handleMouseMove = (e) => {
+      if (Math.random() > 0.3) return; // hanya muncul acak
+      createSparkle(e.clientX, e.clientY);
+    };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
-
-  // ... (products, teamMembers, containerVariants, dll — tetap sama)
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      container.remove();
+    };
+  }, []);
 
   const products = [
     {
@@ -215,8 +183,6 @@ const App = () => {
       {children}
     </motion.div>
   );
-
-  // ... (Navigation, HomePage, MenuPage, AboutPage, ContactPage — tetap sama)
 
   const Navigation = () => (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -348,7 +314,6 @@ const App = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="text-center mb-16"
           >
             <div className="inline-block mb-4">
@@ -364,7 +329,6 @@ const App = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8"
           >
             {products.slice(0, 4).map((product) => (
@@ -401,7 +365,6 @@ const App = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Why Choose Us?</h2>
@@ -441,7 +404,6 @@ const App = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="text-center mb-12 sm:mb-16"
           >
             <div className="inline-block mb-4">
@@ -457,7 +419,6 @@ const App = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="grid md:grid-cols-2 gap-8"
           >
             {products.map((product) => (
@@ -494,7 +455,6 @@ const App = () => {
             variants={fadeInUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="text-center mt-16"
           >
             <a
@@ -519,7 +479,6 @@ const App = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="text-center mb-16"
           >
             <div className="inline-block mb-4">
@@ -535,7 +494,6 @@ const App = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="grid lg:grid-cols-2 gap-12 items-center mb-20"
           >
             <div>
@@ -556,11 +514,11 @@ const App = () => {
               </div>
             </div>
           </motion.div>
+          
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="text-center"
           >
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8">Meet Our Magical Team</h2>
@@ -601,7 +559,6 @@ const App = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="text-center mb-16"
           >
             <div className="inline-block mb-4">
@@ -617,7 +574,6 @@ const App = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
             className="grid lg:grid-cols-2 gap-12"
           >
             <div>
@@ -728,86 +684,6 @@ const App = () => {
           </div>
         </div>
       </footer>
-
-      {/* 💜 KawaiiBot - Floating Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setShowAI(!showAI)}
-          className="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-3 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-medium"
-          aria-label="Open KawaiiBot assistant"
-        >
-          💜 KawaiiBot
-        </motion.button>
-      </div>
-
-      {/* Chat Window */}
-      <AnimatePresence>
-        {showAI && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 w-80 max-w-[90vw] bg-white rounded-2xl shadow-xl border border-purple-100 z-50 flex flex-col"
-          >
-            {/* Header */}
-            <div className="bg-gradient-to-r from-purple-600 to-purple-800 p-4 text-white flex justify-between items-center">
-              <h3 className="font-bold">KawaiiBot 💜</h3>
-              <button
-                onClick={() => setShowAI(false)}
-                className="text-white/80 hover:text-white text-lg"
-                aria-label="Close chat"
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Messages */}
-            <div className="p-4 flex-1 overflow-y-auto max-h-60 space-y-3">
-              {messages.map((msg, i) => (
-                <div
-                  key={i}
-                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div
-                    className={`px-3 py-2 rounded-2xl text-sm ${
-                      msg.sender === 'user'
-                        ? 'bg-purple-500 text-white'
-                        : 'bg-gray-100 text-gray-800'
-                    }`}
-                  >
-                    {msg.text.split('\n').map((line, idx) => (
-                      <p key={idx} className="whitespace-pre-line">{line}</p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Input */}
-            <div className="p-3 border-t border-gray-100 flex">
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Tanya tentang produk, harga, dll..."
-                className="flex-1 border border-gray-300 rounded-l-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-300"
-              />
-              <button
-                onClick={handleSend}
-                disabled={!inputValue.trim()}
-                className="bg-purple-600 text-white p-2 rounded-r-full disabled:opacity-50"
-                aria-label="Send message"
-              >
-                <Send size={16} />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
