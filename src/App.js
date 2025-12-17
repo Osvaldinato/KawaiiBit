@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Phone, Mail, MapPin, Star, Instagram, Clock, ShoppingCart, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useTransform, useAnimation } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Phone, Mail, MapPin, Star, Instagram, Clock } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import "./index.css";
 
 // --- Impor gambar produk ---
@@ -17,14 +17,6 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [expandedProduct, setExpandedProduct] = useState(null);
-  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
-  
-  const homeRef = useRef(null);
-  const menuRef = useRef(null);
-  const aboutRef = useRef(null);
-  const contactRef = useRef(null);
 
   // --- Ganti judul halaman dinamis ---
   useEffect(() => {
@@ -89,16 +81,6 @@ const App = () => {
     };
   }, []);
 
-  // --- Scroll Animation ---
-  const scrollToSection = (ref) => {
-    if (ref.current) {
-      window.scrollTo({
-        top: ref.current.offsetTop - 80,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   const products = [
     {
       id: 1,
@@ -106,8 +88,7 @@ const App = () => {
       description: 'Lumpia dengan isi ubi ungu yang manis dan keju yang cheesy',
       price: 'Rp 10.000',
       image: shadowPuffRollImg,
-      category: 'single',
-      details: 'Dibuat dengan kulit lumpia yang renyah dan diisi dengan campuran ubi ungu manis dan keju mozzarella yang meleleh.'
+      category: 'single'
     },
     {
       id: 2,
@@ -115,8 +96,7 @@ const App = () => {
       description: 'Dessert bowl ubi ungu dengan paduan vla vanilla dan keju yang manis dan lembut',
       price: 'Rp 8.000',
       image: mysticManaBowlImg,
-      category: 'single',
-      details: 'Bowl dessert lembut dengan lapisan ubi ungu, vla vanilla kental, dan topping keju parut yang gurih.'
+      category: 'single'
     },
     {
       id: 3,
@@ -124,8 +104,7 @@ const App = () => {
       description: 'Minuman rasa Taro dengan es batu yang menyegarkan',
       price: 'Rp 8.000',
       image: potionOfElixirImg,
-      category: 'single',
-      details: 'Minuman taro segar dengan susu, sirup taro, dan es batu yang menyegarkan untuk menemani hari Anda.'
+      category: 'single'
     },
     {
       id: 4,
@@ -133,8 +112,7 @@ const App = () => {
       description: 'Lumpia ubi ungu + Dessert Bowl ubi ungu',
       price: 'Rp 18.000',
       image: shadowFeastsPackImg,
-      category: 'combo',
-      details: 'Paket hemat yang berisi satu Shadow Puff Roll dan satu Mystic Mana Bowl. Sempurna untuk berbagi atau menikmati dua favorit sekaligus!'
+      category: 'combo'
     },
     {
       id: 5,
@@ -142,8 +120,7 @@ const App = () => {
       description: 'Lumpia ubi ungu + Minuman es taro',
       price: 'Rp 18.000',
       image: crunchAndChillSetImg,
-      category: 'combo',
-      details: 'Gabungan sempurna antara lumpia renyah dan minuman taro segar. Ideal untuk siang hari yang panas!'
+      category: 'combo'
     },
     {
       id: 6,
@@ -151,8 +128,7 @@ const App = () => {
       description: 'Dessert bowl ubi ungu + Minuman es taro',
       price: 'Rp 16.000',
       image: winterPurplePackImg,
-      category: 'combo',
-      details: 'Paket manis dan segar! Satu Mystic Mana Bowl ditambah satu Potion of Elixir. Nikmati kombinasi manis dan menyegarkan.'
+      category: 'combo'
     },
     {
       id: 7,
@@ -160,19 +136,18 @@ const App = () => {
       description: 'Lumpia ubi ungu + Dessert Bowl ubi ungu + Minuman es taro',
       price: 'Rp 23.000',
       image: purpleParadisePackImg,
-      category: 'combo',
-      details: 'Paket lengkap untuk penggemar ubi ungu! Semua menu favorit dalam satu paket. Nilai terbaik untuk Anda yang ingin mencoba semuanya!'
+      category: 'combo'
     }
   ];
 
   const teamMembers = [
-    { name: 'Fadlila Zahra Achdalina', role: 'CEO', image: 'https://placehold.co/200x200/9333EA/FFFFFF?text=FZA' },
-    { name: 'Decka Hardiana', role: 'CMO', image: 'https://placehold.co/200x200/7E22CE/FFFFFF?text=DH' },
-    { name: 'Chelsa Alya Salvasta', role: 'COO', image: 'https://placehold.co/200x200/8B5CF6/FFFFFF?text=CAS' },
-    { name: 'Nurfitria Dynda Camelia', role: 'CDO', image: 'https://placehold.co/200x200/A78BFA/FFFFFF?text=NDC' },
-    { name: 'Hanum Febriyani', role: 'CFO', image: 'https://placehold.co/200x200/C084FC/FFFFFF?text=HF' },
-    { name: 'Aldy Astira', role: 'CPO', image: 'https://placehold.co/200x200/D8B4FE/FFFFFF?text=AA' },
-    { name: 'Rangga Pratama Wiradinata', role: 'CTO', image: 'https://placehold.co/200x200/E9D5FF/FFFFFF?text=RPW' }
+    { name: 'Fadlila Zahra Achdalina', role: 'CEO', image: 'https://placehold.co/200x200/9333EA/FFFFFF?text=FZA  ' },
+    { name: 'Decka Hardiana', role: 'CMO', image: 'https://placehold.co/200x200/7E22CE/FFFFFF?text=DH  ' },
+    { name: 'Chelsa Alya Salvasta', role: 'COO', image: 'https://placehold.co/200x200/8B5CF6/FFFFFF?text=CAS  ' },
+    { name: 'Nurfitria Dynda Camelia', role: 'CDO', image: 'https://placehold.co/200x200/A78BFA/FFFFFF?text=NDC  ' },
+    { name: 'Hanum Febriyani', role: 'CFO', image: 'https://placehold.co/200x200/C084FC/FFFFFF?text=HF  ' },
+    { name: 'Aldy Astira', role: 'CPO', image: 'https://placehold.co/200x200/D8B4FE/FFFFFF?text=AA  ' },
+    { name: 'Rangga Pratama Wiradinata', role: 'CTO', image: 'https://placehold.co/200x200/E9D5FF/FFFFFF?text=RPW  ' }
   ];
 
   const containerVariants = {
@@ -295,23 +270,9 @@ const App = () => {
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 w-32 h-32 bg-purple-200 rounded-full opacity-20 animate-pulse"></div>
           <div className="absolute top-1/3 right-20 w-24 h-24 bg-purple-300 rounded-full opacity-15 animate-pulse delay-700"></div>
-          <div className="absolute bottom-20 left-1/4 w-20 h-20 bg-purple-400 rounded-full opacity-10 animate-pulse delay-1000"></div>
         </div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 100, damping: 10 }}
-            className="mb-8"
-          >
-            <img 
-              src="https://placehold.co/200x200/FFD6E0/FFFFFF?text=🐱" 
-              alt="Kawaii Cat"
-              className="w-24 h-24 mx-auto rounded-full shadow-lg"
-            />
-          </motion.div>
-          
           <motion.h1 
             variants={itemVariants}
             initial="hidden"
@@ -333,33 +294,21 @@ const App = () => {
             Handcrafted taro and purple sweet potato treats that bring joy to every bite
           </motion.p>
           
-          <motion.div
+          <motion.button
             variants={itemVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+            onClick={() => setActivePage('menu')}
           >
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={() => setActivePage('menu')}
-            >
-              Explore Our Menu
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-purple-50 transition-all duration-300"
-              onClick={() => setShowFeedbackModal(true)}
-            >
-              Give Feedback
-            </motion.button>
-          </motion.div>
+            Explore Our Menu
+          </motion.button>
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={containerVariants}
@@ -386,42 +335,31 @@ const App = () => {
               <motion.div
                 key={product.id}
                 variants={itemVariants}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 group cursor-pointer"
-                onClick={() => setExpandedProduct(product.id)}
+                whileHover={{ y: -8 }}
+                className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
               >
-                <div className="mb-4 rounded-xl overflow-hidden relative group-hover:scale-105 transition-transform duration-300">
+                <div className="mb-4 rounded-xl overflow-hidden relative">
                   <img 
                     src={product.image} 
                     alt={product.name}
-                    className="w-full h-40 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-40 sm:h-48 object-cover"
                   />
                   {product.category === 'combo' && (
                     <div className="absolute top-2 left-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                       Combo
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>
                 <h3 className="font-bold text-lg text-gray-800 mb-2 line-clamp-1">{product.name}</h3>
                 <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="font-bold text-purple-600 text-lg">{product.price}</span>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="text-purple-600 hover:text-purple-800 p-2 rounded-full hover:bg-purple-50 transition-colors"
-                  >
-                    <ShoppingCart size={20} />
-                  </motion.button>
-                </div>
+                <div className="text-purple-600 font-bold text-lg">{product.price}</div>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+      <section className="py-20 bg-gradient-to-br from-purple-50 to-purple-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={containerVariants}
@@ -444,8 +382,8 @@ const App = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ y: -5, scale: 1.03 }}
-                className="bg-white rounded-2xl p-8 text-center shadow-md hover:shadow-lg transition-all duration-300"
+                whileHover={{ y: -5 }}
+                className="bg-white rounded-2xl p-8 text-center shadow-md hover:shadow-lg transition-all"
               >
                 <div className="text-4xl mb-4">{item.icon}</div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3">{item.title}</h3>
@@ -477,80 +415,40 @@ const App = () => {
             </p>
           </motion.div>
           
-          {/* Filter Buttons */}
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            className="flex flex-wrap justify-center gap-4 mb-8"
-          >
-            {[
-              { value: 'all', label: 'All Items' },
-              { value: 'single', label: 'Single Items' },
-              { value: 'combo', label: 'Combo Packs' }
-            ].map((filter) => (
-              <motion.button
-                key={filter.value}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedCategory(filter.value)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  selectedCategory === filter.value 
-                    ? 'bg-gradient-to-r from-purple-600 to-purple-800 text-white shadow-lg' 
-                    : 'bg-white text-purple-600 border-2 border-purple-200 hover:bg-purple-50'
-                }`}
-              >
-                {filter.label}
-              </motion.button>
-            ))}
-          </motion.div>
-          
-          {/* Product Grid */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             className="grid md:grid-cols-2 gap-8"
           >
-            {products
-              .filter(product => selectedCategory === 'all' || product.category === selectedCategory)
-              .map((product) => (
-                <motion.div
-                  key={product.id}
-                  variants={itemVariants}
-                  whileHover={{ y: -4, scale: 1.01 }}
-                  className="bg-white rounded-2xl p-6 sm:p-8 shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-                    <div className="flex-shrink-0 relative group">
-                      <img 
-                        src={product.image} 
-                        alt={product.name}
-                        className="w-28 h-28 rounded-xl object-cover shadow-sm transition-transform duration-300 group-hover:scale-105"
-                      />
-                      {product.category === 'combo' && (
-                        <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                          Combo
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-center sm:text-left">
-                      <h3 className="font-bold text-xl text-gray-800 mb-2">{product.name}</h3>
-                      <p className="text-gray-600 mb-4">{product.description}</p>
-                      <div className="font-bold text-purple-600 text-xl">{product.price}</div>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="mt-4 bg-gradient-to-r from-purple-600 to-purple-800 text-white px-6 py-2 rounded-full text-sm font-semibold hover:shadow-lg transition-all"
-                        onClick={() => window.open("https://forms.gle/nniL1RQbP6HjmFTBA", "_blank")}
-                      >
-                        Order Now
-                      </motion.button>
-                    </div>
+            {products.map((product) => (
+              <motion.div
+                key={product.id}
+                variants={itemVariants}
+                whileHover={{ y: -4 }}
+                className="bg-white rounded-2xl p-6 sm:p-8 shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                  <div className="flex-shrink-0 relative">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-28 h-28 rounded-xl object-cover shadow-sm"
+                    />
+                    {product.category === 'combo' && (
+                      <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                        Combo
+                      </div>
+                    )}
                   </div>
-                </motion.div>
-              ))}
+                  <div className="text-center sm:text-left">
+                    <h3 className="font-bold text-xl text-gray-800 mb-2">{product.name}</h3>
+                    <p className="text-gray-600 mb-4">{product.description}</p>
+                    <div className="font-bold text-purple-600 text-xl">{product.price}</div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
 
           <motion.div 
@@ -560,7 +458,7 @@ const App = () => {
             className="text-center mt-16"
           >
             <a
-              href="https://forms.gle/nniL1RQbP6HjmFTBA"
+              href="https://forms.gle/nniL1RQbP6HjmFTBA  "
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-purple-600 to-purple-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
@@ -588,7 +486,7 @@ const App = () => {
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Our Story</h1>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Passion for purple sweet potatoes and taro since 2020
+              Passion for purple sweet potatoes and taro 
             </p>
           </motion.div>
           
@@ -615,17 +513,6 @@ const App = () => {
                 <span className="text-lg">Loved by over 100 customers</span>
               </div>
             </div>
-            <div className="relative">
-              <div className="bg-gradient-to-br from-purple-200 to-purple-400 rounded-2xl w-full h-80 shadow-xl"></div>
-              <div className="absolute -bottom-8 -right-8 bg-white rounded-2xl p-6 shadow-2xl border-2 border-purple-100">
-                <img 
-                  src="https://placehold.co/250x200/8B5CF6/FFFFFF?text=Fresh+Ingredients" 
-                  alt="Fresh Ingredients"
-                  className="rounded-lg w-full h-32 object-cover"
-                />
-                <p className="text-center text-sm text-gray-600 mt-2">Freshly sourced daily</p>
-              </div>
-            </div>
           </motion.div>
           
           <motion.div
@@ -640,8 +527,8 @@ const App = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  whileHover={{ y: -8, scale: 1.03 }}
-                  className="bg-white rounded-2xl p-5 shadow-md hover:shadow-lg transition-all duration-300"
+                  whileHover={{ y: -6 }}
+                  className="bg-white rounded-2xl p-5 shadow-md hover:shadow-lg transition-all"
                 >
                   <div className="relative mb-3">
                     <img 
@@ -712,28 +599,14 @@ const App = () => {
                   </motion.div>
                 ))}
               </div>
-              
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ scale: 1.02 }}
-                className="bg-gradient-to-r from-purple-500 to-purple-700 rounded-2xl p-6 text-white shadow-lg"
-              >
-                <div className="flex items-center space-x-3 mb-4">
-                  <Clock size={24} />
-                  <h3 className="text-2xl font-bold">Opening Hours</h3>
-                </div>
-                <div className="space-y-2 text-lg">
-                  <p>Monday - Friday: 9 AM - 7 PM</p>
-                  <p>Saturday: 10 AM - 8 PM</p>
-                  <p>Sunday: 11 AM - 6 PM</p>
-                </div>
-              </motion.div>
+          
+            
             </div>
             
             <div>
               <motion.div
                 variants={itemVariants}
-                className="bg-white rounded-2xl p-6 sm:p-8 shadow-md"
+                className="bg-white rounded-2xl p-6 sm:p-8 shadow-md text-center"
               >
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">Send us Feedback</h3>
                 <p className="text-gray-600 mb-6">
@@ -742,7 +615,7 @@ const App = () => {
                 <motion.a
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  href="https://forms.gle/Qmr7k5aakCbfy8hD6"
+                  href="https://forms.gle/Qmr7k5aakCbfy8hD6  "
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block bg-gradient-to-r from-purple-600 to-purple-800 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
@@ -767,63 +640,8 @@ const App = () => {
     }
   };
 
-  // Feedback Modal Component
-  const FeedbackModal = () => (
-    <AnimatePresence>
-      {showFeedbackModal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-          onClick={() => setShowFeedbackModal(false)}
-        >
-          <motion.div
-            initial={{ scale: 0.8, y: 50 }}
-            animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.8, y: 50 }}
-            className="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-gray-800">Give Us Feedback</h2>
-              <button
-                onClick={() => setShowFeedbackModal(false)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X size={24} />
-              </button>
-            </div>
-            
-            <p className="text-gray-600 mb-6">
-              We value your opinion! Help us improve by sharing your experience with our products.
-            </p>
-            
-            <div className="space-y-4">
-              <button
-                onClick={() => {
-                  window.open("https://forms.gle/Qmr7k5aakCbfy8hD6", "_blank");
-                  setShowFeedbackModal(false);
-                }}
-                className="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all"
-              >
-                Open Feedback Form
-              </button>
-              <button
-                onClick={() => setShowFeedbackModal(false)}
-                className="w-full border-2 border-purple-200 text-purple-600 py-3 rounded-xl font-semibold hover:bg-purple-50 transition-all"
-              >
-                Maybe Later
-              </button>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-transparent">
       <Navigation />
       <main className="pt-20">
         <AnimatePresence mode="wait">
@@ -853,9 +671,6 @@ const App = () => {
           </div>
         </div>
       </footer>
-      
-      {/* Feedback Modal */}
-      <FeedbackModal />
     </div>
   );
 };
